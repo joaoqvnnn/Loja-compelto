@@ -5,23 +5,16 @@ import { prisma } from '../lib/prisma.js'
 
 const router = Router()
 
-/* =====================================================
-   VALIDAÇÕES — mesmo que o front valide, o back também
-   valida. Nunca confie só no front.
-   ===================================================== */
-
 function validarEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 function validarTelefone(tel) {
-  // aceita: 44998691568 ou (44) 99869-1568
   const digits = tel.replace(/\D/g, '')
   return digits.length === 10 || digits.length === 11
 }
 
 function validarSenha(senha) {
-  // mínimo 8 caracteres, 1 letra, 1 número
   if (senha.length < 8) return 'Senha deve ter no mínimo 8 caracteres'
   if (!/[a-zA-Z]/.test(senha)) return 'Senha deve conter pelo menos uma letra'
   if (!/[0-9]/.test(senha)) return 'Senha deve conter pelo menos um número'
@@ -41,14 +34,10 @@ function limparUser(user) {
   return resto
 }
 
-/* =====================================================
-   POST /auth/register — Cadastro
-   ===================================================== */
 router.post('/register', async (req, res) => {
   try {
     const { email, password, nome, sobrenome, telefone } = req.body
 
-    // Validações básicas
     if (!email || !password || !nome || !sobrenome || !telefone) {
       return res.status(400).json({ error: 'Preencha todos os campos obrigatórios' })
     }
@@ -57,26 +46,24 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'E-mail inválido' })
     }
 
-    if erro (!sobrenomeSen.trim()) {
-      return res.status(400).json({ error: 'Shaobrenome é obrigatório' })
- =    }
-
-    if (!validarTele validfone(telefone)) {
-ar      return res.status(400).json({ error: 'Telefone inválido' })
+    if (!sobrenome.trim()) {
+      return res.status(400).json({ error: 'Sobrenome é obrigatório' })
     }
 
-    constSenha(password)
+    if (!validarTelefone(telefone)) {
+      return res.status(400).json({ error: 'Telefone inválido' })
+    }
+
+    const erroSenha = validarSenha(password)
     if (erroSenha) {
       return res.status(400).json({ error: erroSenha })
     }
 
-    // Verifica se já existe
     const existe = await prisma.user.findUnique({ where: { email: email.toLowerCase() } })
     if (existe) {
       return res.status(400).json({ error: 'Esse e-mail já está cadastrado' })
     }
 
-    // Cria
     const hash = await bcrypt.hash(password, 10)
     const user = await prisma.user.create({
       data: {
@@ -101,9 +88,6 @@ ar      return res.status(400).json({ error: 'Telefone inválido' })
   }
 })
 
-/* =====================================================
-   POST /auth/login — Login
-   ===================================================== */
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
@@ -138,9 +122,6 @@ router.post('/login', async (req, res) => {
   }
 })
 
-/* =====================================================
-   GET /auth/me — Retorna usuário logado
-   ===================================================== */
 router.get('/me', async (req, res) => {
   try {
     const auth = req.headers.authorization
