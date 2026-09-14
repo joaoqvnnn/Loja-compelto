@@ -6,6 +6,7 @@ import Ofertas from './components/Ofertas.jsx'
 import MaisVendidos from './components/MaisVendidos.jsx'
 import Recentes from './components/Recentes.jsx'
 import Vendedores from './components/Vendedores.jsx'
+import ComeceVender from './components/ComeceVender.jsx'
 
 export default function App() {
   const [tema, setTema] = useState('light')
@@ -91,6 +92,7 @@ export default function App() {
         <MaisVendidos />
         <Recentes />
         <Vendedores />
+        <ComeceVender />
       </main>
 
     </div>
