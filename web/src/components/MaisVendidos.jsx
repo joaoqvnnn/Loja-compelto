@@ -1,63 +1,27 @@
 import { motion } from 'framer-motion'
-import { Heart, ShoppingCart, ChevronLeft, ChevronRight, Star, Flame } from 'lucide-react'
 import { useRef } from 'react'
+import {
+  Heart, ShoppingCart, ChevronLeft, ChevronRight, Star, Flame,
+  Gamepad2, Film, Music, BookOpen, Camera, Laptop, Palette, Gift
+} from 'lucide-react'
 
 /* =========================================================
-   PRODUTOS — depois virão do banco (admin cadastra e marca
-   como "mais vendido", ou o sistema ordena por vendas reais)
+   PRODUTOS — depois virão do banco (o sistema ordena por
+   vendas reais, ou o admin marca manualmente como destaque)
    ========================================================= */
 const PRODUTOS = [
-  {
-    id: 1, emoji: '🎮', imagem: 'linear-gradient(135deg,#1e3a8a,#7c3aed)',
-    titulo: 'Steam Keys Aleatórias | Entrega Automática',
-    preco: 1.50, precoAntigo: 4.99, desconto: 70,
-    avaliacao: 4.9, vendidos: 1243,
-  },
-  {
-    id: 2, emoji: '🎬', imagem: 'linear-gradient(135deg,#dc2626,#7c2d12)',
-    titulo: 'Netflix Premium 1 Mês 4K',
-    preco: 19.90, precoAntigo: 39.90, desconto: 50,
-    avaliacao: 4.8, vendidos: 872,
-  },
-  {
-    id: 3, emoji: '🎵', imagem: 'linear-gradient(135deg,#16a34a,#065f46)',
-    titulo: 'Spotify Premium 3 Meses',
-    preco: 24.90, precoAntigo: 49.90, desconto: 50,
-    avaliacao: 4.9, vendidos: 2104,
-  },
-  {
-    id: 4, emoji: '📚', imagem: 'linear-gradient(135deg,#ea580c,#f59e0b)',
-    titulo: 'Curso Marketing Digital 2025',
-    preco: 9.99, precoAntigo: 29.90, desconto: 66,
-    avaliacao: 4.7, vendidos: 431,
-  },
-  {
-    id: 5, emoji: '📸', imagem: 'linear-gradient(135deg,#db2777,#7c3aed)',
-    titulo: 'Instagram 1K Seguidores BR',
-    preco: 14.90, precoAntigo: 29.90, desconto: 50,
-    avaliacao: 4.6, vendidos: 654,
-  },
-  {
-    id: 6, emoji: '💻', imagem: 'linear-gradient(135deg,#0891b2,#1e40af)',
-    titulo: 'Windows 11 Pro | Chave Vitalícia',
-    preco: 34.90, precoAntigo: 89.90, desconto: 61,
-    avaliacao: 4.8, vendidos: 1089,
-  },
-  {
-    id: 7, emoji: '⭐', imagem: 'linear-gradient(135deg,#7c3aed,#db2777)',
-    titulo: 'Canva Pro Vitalício',
-    preco: 12.90, precoAntigo: 39.90, desconto: 68,
-    avaliacao: 4.9, vendidos: 1520,
-  },
-  {
-    id: 8, emoji: '🎁', imagem: 'linear-gradient(135deg,#f59e0b,#dc2626)',
-    titulo: 'Gift Card Google Play R$ 50',
-    preco: 42.90, precoAntigo: 50.00, desconto: 14,
-    avaliacao: 5.0, vendidos: 320,
-  },
+  { id: 1, Icone: Gamepad2, imagem: 'linear-gradient(135deg,#1e3a8a,#7c3aed)', titulo: 'Steam Keys Aleatórias | Entrega Automática', preco: 1.50,  precoAntigo: 4.99,  desconto: 70, avaliacao: 4.9, vendidos: 1243 },
+  { id: 2, Icone: Film,     imagem: 'linear-gradient(135deg,#dc2626,#7c2d12)', titulo: 'Netflix Premium 1 Mês 4K',                  preco: 19.90, precoAntigo: 39.90, desconto: 50, avaliacao: 4.8, vendidos: 872  },
+  { id: 3, Icone: Music,    imagem: 'linear-gradient(135deg,#16a34a,#065f46)', titulo: 'Spotify Premium 3 Meses',                  preco: 24.90, precoAntigo: 49.90, desconto: 50, avaliacao: 4.9, vendidos: 2104 },
+  { id: 4, Icone: BookOpen, imagem: 'linear-gradient(135deg,#ea580c,#f59e0b)', titulo: 'Curso Marketing Digital 2025',             preco: 9.99,  precoAntigo: 29.90, desconto: 66, avaliacao: 4.7, vendidos: 431  },
+  { id: 5, Icone: Camera,   imagem: 'linear-gradient(135deg,#db2777,#7c3aed)', titulo: 'Instagram 1K Seguidores BR',               preco: 14.90, precoAntigo: 29.90, desconto: 50, avaliacao: 4.6, vendidos: 654  },
+  { id: 6, Icone: Laptop,   imagem: 'linear-gradient(135deg,#0891b2,#1e40af)', titulo: 'Windows 11 Pro | Chave Vitalícia',         preco: 34.90, precoAntigo: 89.90, desconto: 61, avaliacao: 4.8, vendidos: 1089 },
+  { id: 7, Icone: Palette,  imagem: 'linear-gradient(135deg,#7c3aed,#db2777)', titulo: 'Canva Pro Vitalício',                      preco: 12.90, precoAntigo: 39.90, desconto: 68, avaliacao: 4.9, vendidos: 1520 },
+  { id: 8, Icone: Gift,     imagem: 'linear-gradient(135deg,#f59e0b,#dc2626)', titulo: 'Gift Card Google Play R$ 50',              preco: 42.90, precoAntigo: 50.00, desconto: 14, avaliacao: 5.0, vendidos: 320  },
 ]
 
 function CardVendido({ p, i }) {
+  const { Icone } = p
   return (
     <motion.div
       initial={{ opacity: 0, x: 30 }}
@@ -72,12 +36,15 @@ function CardVendido({ p, i }) {
       }}
     >
       {/* Imagem */}
-      <div className="relative aspect-square flex items-center justify-center text-5xl" style={{ background: p.imagem }}>
-        {p.emoji}
+      <div
+        className="relative aspect-square flex items-center justify-center"
+        style={{ background: p.imagem }}
+      >
+        <Icone size={56} color="white" strokeWidth={1.5} />
 
         {/* Ranking */}
         <div className="absolute top-2 left-2 flex items-center gap-1 bg-black/60 backdrop-blur text-white text-xs font-bold px-2 py-1 rounded-full">
-          <Flame size={12} className="text-orange-400" />
+          <Flame size={12} />
           #{i + 1}
         </div>
 
@@ -142,18 +109,17 @@ export default function MaisVendidos() {
   return (
     <section className="py-10">
 
-      {/* Cabeçalho (dentro do container pra alinhar) */}
       <div className="container-app flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
-            🏆 Produtos mais vendidos
+            <Flame size={22} className="text-orange-500" />
+            Produtos mais vendidos
           </h2>
           <p className="text-sm texto-suave mt-1">
             Os favoritos da galera
           </p>
         </div>
 
-        {/* Setas (esconde no mobile) */}
         <div className="hidden sm:flex gap-2">
           <button
             onClick={() => rolar(-1)}
@@ -174,7 +140,6 @@ export default function MaisVendidos() {
         </div>
       </div>
 
-      {/* Carrossel — arrasta com o dedo */}
       <div
         ref={carrossel}
         className="flex gap-3 sm:gap-4 overflow-x-auto px-4 sm:px-[max(1rem,calc((100vw-1200px)/2+1rem))] pb-2 snap-x snap-mandatory"
