@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Moon, Sun, Search, ShoppingCart, User } from 'lucide-react'
+import Hero from './components/Hero.jsx'
 
 export default function App() {
   const [tema, setTema] = useState('light')
@@ -17,10 +18,10 @@ export default function App() {
     <div className="min-h-screen" style={{ background: 'var(--cor-fundo)' }}>
 
       {/* ==========================================
-          HEADER — versão inicial (depois vira editável)
+          HEADER
           ========================================== */}
       <header
-        className="sticky top-0 z-50 borda"
+        className="sticky top-0 z-50"
         style={{
           background: 'var(--cor-card)',
           borderBottom: '1px solid var(--cor-borda)'
@@ -46,8 +47,8 @@ export default function App() {
 
             {/* Busca */}
             <button
-              className="w-10 h-10 rounded-full flex items-center justify-center borda"
-              style={{ background: 'var(--cor-fundo-alt)' }}
+              className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ background: 'var(--cor-fundo-alt)', border: '1px solid var(--cor-borda)' }}
               aria-label="Buscar"
             >
               <Search size={18} />
@@ -56,8 +57,8 @@ export default function App() {
             {/* Tema claro/escuro */}
             <button
               onClick={alternarTema}
-              className="w-10 h-10 rounded-full flex items-center justify-center borda"
-              style={{ background: 'var(--cor-fundo-alt)' }}
+              className="w-10 h-10 rounded-full flex items-center justify-center"
+              style={{ background: 'var(--cor-fundo-alt)', border: '1px solid var(--cor-borda)' }}
               aria-label="Alternar tema"
             >
               {tema === 'light' ? <Moon size={18} /> : <Sun size={18} />}
@@ -65,17 +66,15 @@ export default function App() {
 
             {/* Carrinho */}
             <button
-              className="w-10 h-10 rounded-full flex items-center justify-center borda hidden sm:flex"
-              style={{ background: 'var(--cor-fundo-alt)' }}
+              className="w-10 h-10 rounded-full items-center justify-center hidden sm:flex"
+              style={{ background: 'var(--cor-fundo-alt)', border: '1px solid var(--cor-borda)' }}
               aria-label="Carrinho"
             >
               <ShoppingCart size={18} />
             </button>
 
             {/* Entrar */}
-            <button
-              className="px-5 h-10 rounded-full font-semibold text-white flex items-center gap-2 bg-primaria transition-all"
-            >
+            <button className="px-5 h-10 rounded-full font-semibold text-white flex items-center gap-2 bg-primaria transition-all">
               <User size={16} />
               Entrar
             </button>
@@ -84,18 +83,11 @@ export default function App() {
       </header>
 
       {/* ==========================================
-          CONTEÚDO — placeholder (Home completa vem nos
-          próximos arquivos)
+          HOME
           ========================================== */}
-      <main className="container-app py-16 text-center">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-          Bem-vindo ao <span style={{ color: 'var(--cor-primaria)' }}>TrustMarket</span>
-        </h1>
-        <p className="texto-suave text-lg max-w-xl mx-auto">
-          O header acima já está funcionando, com tema claro/escuro.
-          Nas próximas etapas vamos montar banner, categorias, produtos,
-          ofertas, FAQ, footer e o painel administrativo que controla tudo.
-        </p>
+      <main>
+        {/* Banner/Hero com carrossel animado */}
+        <Hero />
       </main>
 
     </div>
