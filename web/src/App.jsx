@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Moon, Sun, Search, ShoppingCart, User } from 'lucide-react'
 import Hero from './components/Hero.jsx'
 import Categorias from './components/Categorias.jsx'
+import Ofertas from './components/Ofertas.jsx'
 
 export default function App() {
   const [tema, setTema] = useState('light')
@@ -83,6 +84,7 @@ export default function App() {
       <main>
         <Hero />
         <Categorias />
+        <Ofertas />
       </main>
 
     </div>
