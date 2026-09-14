@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ============================================
+   VARIÁVEIS DE TEMA
+   Essas variáveis serão controladas pelo painel
+   administrativo depois (cores, fontes, etc).
+   ============================================ */
+:root {
+  --cor-primaria: #2563eb;
+  --cor-primaria-hover: #1d4ed8;
+  --cor-primaria-texto: #ffffff;
+
+  --cor-fundo: #ffffff;
+  --cor-fundo-alt: #f8fafc;
+  --cor-card: #ffffff;
+  --cor-borda: #e2e8f0;
+
+  --cor-texto: #0f172a;
+  --cor-texto-suave: #64748b;
+
+  --cor-sucesso: #16a34a;
+  --cor-alerta: #f59e0b;
+  --cor-erro: #dc2626;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* Tema escuro */
+.dark {
+  --cor-fundo: #0b1120;
+  --cor-fundo-alt: #0f172a;
+  --cor-card: #111827;
+  --cor-borda: #1e293b;
+
+  --cor-texto: #f1f5f9;
+  --cor-texto-suave: #94a3b8;
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ============================================
+   UTILITÁRIOS QUE O ADMIN VAI USAR
+   ============================================ */
+.bg-primaria      { background: var(--cor-primaria); color: var(--cor-primaria-texto); }
+.bg-primaria:hover{ background: var(--cor-primaria-hover); }
+.text-primaria    { color: var(--cor-primaria); }
+.bg-card          { background: var(--cor-card); }
+.bg-fundo-alt     { background: var(--cor-fundo-alt); }
+.borda            { border: 1px solid var(--cor-borda); }
+.texto-suave      { color: var(--cor-texto-suave); }
+
+.container-app {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ============================================
+   SCROLLBAR (fina e elegante)
+   ============================================ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--cor-borda);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--cor-texto-suave); }
+
+/* ============================================
+   ANIMAÇÕES GLOBAIS
+   ============================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-suave {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Skeleton de carregamento (aquele cinza animado) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--cor-fundo-alt) 0%,
+    var(--cor-borda) 50%,
+    var(--cor-fundo-alt) 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: var(--radius-sm);
+}
