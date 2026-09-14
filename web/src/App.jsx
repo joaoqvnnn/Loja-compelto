@@ -3,6 +3,7 @@ import { Moon, Sun, Search, ShoppingCart, User } from 'lucide-react'
 import Hero from './components/Hero.jsx'
 import Categorias from './components/Categorias.jsx'
 import Ofertas from './components/Ofertas.jsx'
+import MaisVendidos from './components/MaisVendidos.jsx'
 
 export default function App() {
   const [tema, setTema] = useState('light')
@@ -85,6 +86,7 @@ export default function App() {
         <Hero />
         <Categorias />
         <Ofertas />
+        <MaisVendidos />
       </main>
 
     </div>
