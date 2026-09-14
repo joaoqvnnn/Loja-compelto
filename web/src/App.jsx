@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Moon, Sun, Search, ShoppingCart, User } from 'lucide-react'
 import Hero from './components/Hero.jsx'
+import Categorias from './components/Categorias.jsx'
 
 export default function App() {
   const [tema, setTema] = useState('light')
 
-  // Aplica/remove a classe .dark no <html> conforme o tema
   useEffect(() => {
     const html = document.documentElement
     if (tema === 'dark') html.classList.add('dark')
@@ -29,7 +29,7 @@ export default function App() {
       >
         <div className="container-app flex items-center justify-between h-16 gap-3">
 
-          {/* Logo + Nome (depois o admin troca aqui) */}
+          {/* Logo + Nome */}
           <div className="flex items-center gap-2 shrink-0">
             <div
               className="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-white"
@@ -42,10 +42,8 @@ export default function App() {
             </span>
           </div>
 
-          {/* Botões à direita */}
+          {/* Ações */}
           <div className="flex items-center gap-2">
-
-            {/* Busca */}
             <button
               className="w-10 h-10 rounded-full flex items-center justify-center"
               style={{ background: 'var(--cor-fundo-alt)', border: '1px solid var(--cor-borda)' }}
@@ -54,7 +52,6 @@ export default function App() {
               <Search size={18} />
             </button>
 
-            {/* Tema claro/escuro */}
             <button
               onClick={alternarTema}
               className="w-10 h-10 rounded-full flex items-center justify-center"
@@ -64,7 +61,6 @@ export default function App() {
               {tema === 'light' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
 
-            {/* Carrinho */}
             <button
               className="w-10 h-10 rounded-full items-center justify-center hidden sm:flex"
               style={{ background: 'var(--cor-fundo-alt)', border: '1px solid var(--cor-borda)' }}
@@ -73,7 +69,6 @@ export default function App() {
               <ShoppingCart size={18} />
             </button>
 
-            {/* Entrar */}
             <button className="px-5 h-10 rounded-full font-semibold text-white flex items-center gap-2 bg-primaria transition-all">
               <User size={16} />
               Entrar
@@ -86,8 +81,8 @@ export default function App() {
           HOME
           ========================================== */}
       <main>
-        {/* Banner/Hero com carrossel animado */}
         <Hero />
+        <Categorias />
       </main>
 
     </div>
